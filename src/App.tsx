@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grommet } from 'grommet';
+import { createClient, Provider } from 'urql';
+
+
 
 function App() {
+  const client = createClient({
+    url: 'https://iteria-customers-db.hasura.app/v1/graphql',
+    fetchOptions: () => {
+      return {
+        headers: { "x-hasura-admin-secret": "DdbGIfDZoS7zzlFwzmqnOPFeAxsoVgjs7AMpLnzf24JXJ7i1rALA4V08GZXD3s2N" },
+      };
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider value={client}>
+      <Grommet plain>
+        
+      </Grommet>
+    </Provider>
   );
 }
 
