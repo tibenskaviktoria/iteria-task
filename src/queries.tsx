@@ -1,7 +1,5 @@
-import gql from 'graphql-tag'
-
-export const fetchCustomers = gql`
-  {
+export const FetchCustomersQuery = `
+  query {
     customers {
       uuid
       name
@@ -18,8 +16,8 @@ export const fetchCustomers = gql`
   }
 `
 
-export const fetchCustomerWithOrders = gql`
-  ($id: uuid!) {
+export const FetchCustomerWithOrdersQuery = `
+  query ($id: uuid!) {
     customers_by_pk(uuid: $id) {
       uuid
       name
