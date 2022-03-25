@@ -8,7 +8,7 @@ interface Props {
 export const OrdersList:React.FC<Props> = ({orders}) => {
   function getDateFromTimestamp(timestamp: string): string {
     const date = new Date(timestamp);
-    return date.toDateString();
+    return date.toLocaleDateString("en-US");
   }
 
   return (
