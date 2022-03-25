@@ -21,10 +21,8 @@ function App() {
       <Grommet>
         <Router>
           <Routes>
-            <Route path='/' element={<CustomerList/>}>
-              
-            </Route>
-            <Route path='customer/:id' element={<CustomerDetail/>}></Route>
+            <Route path='/' element={<CustomerList/>}></Route>
+            <Route path='/customer/:id' element={<CustomerDetail/>}></Route>
           </Routes>
         </Router>
       </Grommet>
