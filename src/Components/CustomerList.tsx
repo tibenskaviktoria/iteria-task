@@ -16,14 +16,14 @@ export const CustomerList:React.FC = () => {
 
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
-
+  const customers = data.customers;
   return (
     <Box>
       <DataTable
         columns={[
         {
           property: 'uuid',
-          header: 'uuid',
+          header: 'UUID',
           render: val => (
             <Anchor href={'/customer/' + val.uuid} label={val.uuid}/>
           ),
@@ -40,9 +40,9 @@ export const CustomerList:React.FC = () => {
         {
           property: 'vip',
           header: 'Vip',
-          render: datum => (
+          render: val => (
             <Box pad={{vertical: 'xsmall'}}>
-              { datum.vip ? <Checkmark/> : <Close/>}
+              { val.vip ? <Checkmark/> : <Close/>}
             </Box>
           ),
         },
@@ -51,7 +51,7 @@ export const CustomerList:React.FC = () => {
           header: 'Sum of all orders',
         },
         ]}
-        data={data.customers}
+        data={customers}
       />
     </Box>
   )
