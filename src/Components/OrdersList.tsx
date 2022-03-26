@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, DataTable, Text } from "grommet";
+import { Box, Card, DataTable, Heading, Text } from "grommet";
 import React from "react";
 
 interface Props {
@@ -12,9 +12,9 @@ export const OrdersList:React.FC<Props> = ({orders}) => {
   }
 
   return (
-    <Card background="light-1">
-      <CardHeader pad="small"><strong>Orders</strong></CardHeader>
-      <CardBody pad="medium">
+    <Box margin={{top: "medium"}} align="center">
+      <Heading margin="small" size="small">Orders</Heading>
+      <Card background="light-1" width={{min:"800px"}}>
         <DataTable
           columns={[
             {
@@ -39,8 +39,12 @@ export const OrdersList:React.FC<Props> = ({orders}) => {
             },
           ]}
           data={orders}
+          pad="small"
+          background={{"header":{"color":"dark-2"}}}
+          resizeable={true}
         />
-      </CardBody>
-    </Card>
+        <Text alignSelf="center" size="large" margin="medium" hidden={orders.length !== 0}>No orders yet</Text>
+      </Card>
+    </Box>
   );
 }

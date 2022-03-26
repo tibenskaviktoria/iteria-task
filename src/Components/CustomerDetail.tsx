@@ -1,4 +1,5 @@
-import { Box, Heading, Text } from 'grommet';
+import { Box, Button, Heading, Text } from 'grommet';
+import { FormPrevious } from 'grommet-icons';
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'urql';
@@ -20,12 +21,15 @@ export const CustomerDetail:React.FC = () => {
   const customer = data.customers_by_pk;
 
   return (
-    <Box margin={"medium"}>
+    <Box fill="vertical" overflow="auto" align="center" flex="grow" justify="start" margin="medium" pad="medium">
+      <Button label="Back" href='/' icon={<FormPrevious/>} gap="xxsmall"/>
       <Heading>{customer.name}</Heading>
-      <Text><strong>UUID:</strong> {customer.uuid}</Text>
-      <Text><strong>Date of birth:</strong> {customer.birth_date}</Text>
-      <Text><strong>Vip:</strong> { customer.vip ? "Yes" : "No"}</Text>
-      
+      <Box margin={{bottom:"medium"}}>
+        <Text><strong>UUID:</strong> {customer.uuid}</Text>
+        <Text><strong>Date of birth:</strong> {customer.birth_date}</Text>
+        <Text><strong>Vip:</strong> { customer.vip ? "Yes" : "No"}</Text>
+      </Box>
+
       <OrdersList orders={customer.orders}/>
     </Box>
   )

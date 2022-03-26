@@ -5,6 +5,7 @@ import { createClient, Provider } from 'urql';
 import { CustomerList } from './Components/CustomerList';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { CustomerDetail } from './Components/CustomerDetail';
+import { theme } from './theme';
 
 function App() {
   const client = createClient({
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <Provider value={client}>
-      <Grommet>
+      <Grommet full theme={theme}>
         <Router>
           <Routes>
             <Route path='/' element={<CustomerList/>}></Route>
