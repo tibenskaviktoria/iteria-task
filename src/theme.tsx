@@ -14,5 +14,12 @@ export const theme = {
     "extend": [
     null
     ]
+  },
+  "dataTable": { 
+    "header": { 
+      "font": { 
+        "weight": "bold"
+      }
+    }
   }
 }
