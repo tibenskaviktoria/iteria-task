@@ -1,0 +1,35 @@
+query fetchCustomers {
+  customers {
+    ...customerFields
+    orders_aggregate {
+      aggregate {
+        sum {
+          total_sum
+        }
+      }
+    }
+  }
+}
+
+query fetchCustomerWithOrders ($id: uuid!) {
+  customers_by_pk(uuid: $id) {
+    ...customerFields
+    orders {
+      ...orderFields
+    }
+  }
+}
+
+fragment customerFields on customers {
+  uuid
+  name
+  birth_date
+  vip
+}
+
+fragment orderFields on orders {
+  uuid
+  date
+  total_sum
+  items_number
+}

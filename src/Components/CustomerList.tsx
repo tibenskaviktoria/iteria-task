@@ -1,22 +1,21 @@
 import React from 'react'
 
-import { Anchor, Box, Card, DataTable, Heading, Text } from 'grommet';
+import { Anchor, Box, Card, DataTable, Heading, Spinner, Text } from 'grommet';
 import { Checkmark, Close } from 'grommet-icons';
 
-import { useQuery } from 'urql';
-import { FetchCustomersQuery } from '../server/queries';
+import { useFetchCustomersQuery } from '../server/generated/graphql';
 
 
 export const CustomerList:React.FC = () => {
-  const [result] = useQuery({
-    query: FetchCustomersQuery,
-  });
-
+  const [result] = useFetchCustomersQuery();
   const { data, fetching, error } = result;
-
-  if (fetching) return <p>Loading...</p>;
+  if (fetching) return (
+    <Box fill="vertical" align="center" justify="center">
+      <Spinner size='medium'/>
+    </Box>
+  );
   if (error) return <p>Oh no... {error.message}</p>;
-  const customers = data.customers;
+  const customers = data?.customers;
 
   function printSumOfOrders(sum: string): string {
     if (sum == null) {
@@ -61,12 +60,13 @@ export const CustomerList:React.FC = () => {
             property: 'orders_aggregate.aggregate.sum.total_sum',
             header: 'Sum of all orders',
             render: val => (
-              <Text>{printSumOfOrders(val.orders_aggregate.aggregate.sum.total_sum)}</Text>
+              <Text>{printSumOfOrders(val?.orders_aggregate?.aggregate?.sum?.total_sum)}</Text>
             ),
           },
           ]}
           data={customers}
-          pad="small" background={{"header":{"color":"dark-2"}}} resizeable={true}
+          pad="small" 
+          background={{"header":{"color":"dark-2"}}}
         />
       </Card>
     </Box>

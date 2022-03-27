@@ -41,7 +41,6 @@ export const OrdersList:React.FC<Props> = ({orders}) => {
           data={orders}
           pad="small"
           background={{"header":{"color":"dark-2"}}}
-          resizeable={true}
         />
         <Text alignSelf="center" size="large" margin="medium" hidden={orders.length !== 0}>No orders yet</Text>
       </Card>
